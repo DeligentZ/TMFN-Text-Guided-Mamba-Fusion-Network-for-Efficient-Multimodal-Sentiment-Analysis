@@ -1,0 +1,16 @@
+dataset_name: "mosei"    # alternative:ch-sims, mosi, mosei
+dropout: 0.3
+batch_size: 8  #alternative: 16, 32
+early_stop: 8
+lr: 4.5e-5
+epochs: 20
+seed: 42 #1, 11, 111
+model_save_path: "best_model/"
+ch_text_pretrained_model: "macbert-base" #alternative: Roberta-wwm-ext
+ch_audio_pretrained_model: "chinese-hubert-base" #alternative: Data2Vec-audio-base
+en_text_pretrained_model: "roberta-base"  #alternative: deberta-v3
+en_audio_pretrained_model: "hubert-base" #alternative: facebook/data2vec-audio-base
+video_pretrained_model: "vit-base" #alternative videomae
+
+
+
