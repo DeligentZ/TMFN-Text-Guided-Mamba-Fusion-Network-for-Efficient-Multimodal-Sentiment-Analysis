@@ -4,4 +4,4 @@ TMFN is a fusion network for efficient multimodal sentiment analysis, it consist
 The link of the TMFN's paper is as follows:
 
 The next part is a readme that tell you how to use our code to achieve the TMFN, if you have any question pls contact me.
-#--------------------------------------------------------------------------------------
+---
