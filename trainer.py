@@ -5,7 +5,6 @@ from torch import nn
 import pandas as pd
 from tqdm import tqdm
 from utils.metricsTop import MetricsTop
-from utils.plot import plot_loss, plot_acc
 from torch.cuda.amp import autocast, GradScaler
 
 device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
@@ -206,9 +205,6 @@ class Trainer:
                 test_results_loss_mix = self.evaluate(model, test_loader, mode="Test (Mix)")
                 print('\n%s: >> ' % (f'TEST (best mix)[{index}] ') + _dict_to_str(test_results_loss_mix))
                 result_all[f"mix_{index}"] = test_results_loss_mix
-
-        plot_loss(range(1, len(train_loss_log)+1), train_loss_log, val_loss_log)
-        plot_acc(range(1, len(train_loss_log)+1), val_acc_log)
         return result_all
     def _error_analyzer(self, model, loader, save_path="val_predictions_detail.csv"):
         model.eval()
@@ -254,4 +250,5 @@ class Trainer:
         print(f"✅ Saved prediction details to {save_path}")
 def _dict_to_str( d):
     return ' '.join([f'{k}: {v:.4f}' for k, v in d.items()])
+
 
