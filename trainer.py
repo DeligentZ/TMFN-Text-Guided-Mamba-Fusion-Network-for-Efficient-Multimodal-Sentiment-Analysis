@@ -92,12 +92,12 @@ class Trainer:
         self.initial_lr = float(self.config["lr"])
         steps_per_epoch = len(train_loader)
         total_steps = steps_per_epoch * self.config["epochs"]
-        if self.dataset_name == "mosi":
-            warmup_ratio = 0.03  # 3%
+        if self.dataset_name == "mosei":
+            warmup_ratio = 0.06  # 3%
         elif self.dataset_name == "sims":
             warmup_ratio = 0.05  # 5%
-        elif self.dataset_name == "mosei":
-            warmup_ratio = 0.06  # 6%
+        elif self.dataset_name == "ur-funny":
+            warmup_ratio = 0.1  # 10%
         else:
             warmup_ratio = 0.1
         self.warmup_steps = int(total_steps * warmup_ratio)
@@ -250,5 +250,6 @@ class Trainer:
         print(f"✅ Saved prediction details to {save_path}")
 def _dict_to_str( d):
     return ' '.join([f'{k}: {v:.4f}' for k, v in d.items()])
+
 
 
