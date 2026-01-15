@@ -116,7 +116,7 @@ def collate_fn_sims(batch):
         "targets": torch.tensor(targets, dtype=torch.float32),
     }
 
-class Dataset_mosi(torch.utils.data.Dataset):
+class Dataset_mosei(torch.utils.data.Dataset):
     def __init__(self, csv_path, audio_directory, en_text_tokenizer_model, mode, ur = False):
         df = pd.read_csv(csv_path)
         self.ur = ur
@@ -240,34 +240,23 @@ def data_loader(config, generator=None):
     batch_size = config["batch_size"]
     ch_text_tokenizer_model = config["ch_text_pretrained_model"]
     en_text_tokenizer_model = config["en_text_pretrained_model"]
-    if dataset == 'mosi':
-        csv_path = '/data/zjz/workspace/data_cmu_ch/MOSI/label.csv'
-        audio_file_path = "/data/zjz/workspace/data_cmu_ch/MOSI/wav"
-        train_data = Dataset_mosi(csv_path, audio_file_path, en_text_tokenizer_model,'train', ur=False)
-        test_data = Dataset_mosi(csv_path, audio_file_path, en_text_tokenizer_model,'test', ur=False)
-        val_data = Dataset_mosi(csv_path, audio_file_path, en_text_tokenizer_model,'valid', ur=False)
-        
-        train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=6, pin_memory=True)
-        test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=6, pin_memory=True)
-        val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False, num_workers=6, pin_memory=True)
-        return train_loader, val_loader, test_loader
-    elif dataset == 'mosei':
-        csv_path = '/data/zjz/workspace/data_cmu_ch/MOSEI/label.csv'
-        audio_file_path = "/data/zjz/workspace/data_cmu_ch/MOSEI/wav"
-        train_data = Dataset_mosi(csv_path, audio_file_path, en_text_tokenizer_model,'train', ur=False)
-        test_data = Dataset_mosi(csv_path, audio_file_path, en_text_tokenizer_model,'test', ur=False)
-        val_data = Dataset_mosi(csv_path, audio_file_path, en_text_tokenizer_model,'valid', ur=False)
+    if dataset == 'mosei':
+        csv_path = '/MOSEI/label.csv'
+        audio_file_path = "/MOSEI/wav"
+        train_data = Dataset_mosei(csv_path, audio_file_path, en_text_tokenizer_model,'train', ur=False)
+        test_data = Dataset_mosei(csv_path, audio_file_path, en_text_tokenizer_model,'test', ur=False)
+        val_data = Dataset_mosei(csv_path, audio_file_path, en_text_tokenizer_model,'valid', ur=False)
         
         train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=6, pin_memory=True)
         test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=6, pin_memory=True)
         val_loader = DataLoader(val_data, batch_size=batch_size, shuffle=False, num_workers=6, pin_memory=True)
         return train_loader, val_loader, test_loader
     elif dataset == 'ur_funny':
-        csv_path = '/data/zjz/workspace/dateset/urfunny_processed_251202/label.csv'
-        audio_file_path = "/data/zjz/workspace/dateset/urfunny_processed_251202/wav"
-        train_data = Dataset_mosi(csv_path, audio_file_path, en_text_tokenizer_model, 'train', ur=True)
-        test_data = Dataset_mosi(csv_path, audio_file_path, en_text_tokenizer_model, 'test', ur=True)
-        val_data = Dataset_mosi(csv_path, audio_file_path, en_text_tokenizer_model, 'valid', ur=True)
+        csv_path = 'label.csv'
+        audio_file_path = "/urfunny_processed_251202/wav"
+        train_data = Dataset_mosei(csv_path, audio_file_path, en_text_tokenizer_model, 'train', ur=True)
+        test_data = Dataset_mosei(csv_path, audio_file_path, en_text_tokenizer_model, 'test', ur=True)
+        val_data = Dataset_mosei(csv_path, audio_file_path, en_text_tokenizer_model, 'valid', ur=True)
 
         train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=6, pin_memory=True)
         test_loader = DataLoader(test_data, batch_size=batch_size, shuffle=False, num_workers=6, pin_memory=True)
@@ -275,8 +264,8 @@ def data_loader(config, generator=None):
         return train_loader, val_loader, test_loader
 
     else:
-        csv_path = '/data/zjz/workspace/data_cmu_ch/SIMS/label.csv'
-        audio_file_path = "/data/zjz/workspace/data_cmu_ch/SIMS/wav"
+        csv_path = '/SIMS/label.csv'
+        audio_file_path = "/SIMS/wav"
         train_data = Dataset_sims(csv_path, audio_file_path, ch_text_tokenizer_model,'train')
         test_data = Dataset_sims(csv_path, audio_file_path, ch_text_tokenizer_model,'test')
         val_data = Dataset_sims(csv_path, audio_file_path, ch_text_tokenizer_model,'valid')
